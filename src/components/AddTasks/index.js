@@ -65,7 +65,7 @@ class AddTasks extends Component {
     this.setState(prevState => ({
       tasksList: [...prevState.tasksList, newTask],
       taskInput: '',
-      activeOptionId,
+      activeOptionId: tagsList[0].optionId,
     }))
   }
 
@@ -75,7 +75,7 @@ class AddTasks extends Component {
       eachTask => eachTask.activeOptionId === id,
     )
 
-    this.setState({tasksList: updatedTaskList})
+    this.setState({tasksList: updatedTaskList, activeOptionId: id})
   }
 
   renderNoTaskContainer = () => (
@@ -85,7 +85,7 @@ class AddTasks extends Component {
   )
 
   renderTasksContainer = () => {
-    const {tasksList} = this.state
+    const {tasksList, activeOptionId} = this.state
 
     const tasksListLength = tasksList.length > 0
 
@@ -98,6 +98,7 @@ class AddTasks extends Component {
               key={eachTag.optionId}
               eachTagDetails={eachTag}
               clickedTagBtn={this.clickedTagBtn}
+              isActive={activeOptionId === eachTag.optionId}
             />
           ))}
         </ul>
