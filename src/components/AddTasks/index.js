@@ -65,6 +65,7 @@ class AddTasks extends Component {
     this.setState(prevState => ({
       tasksList: [...prevState.tasksList, newTask],
       taskInput: '',
+      activeOptionId,
     }))
   }
 
@@ -77,8 +78,16 @@ class AddTasks extends Component {
     this.setState({tasksList: updatedTaskList})
   }
 
+  renderNoTaskContainer = () => (
+    <div className="no-tasks-container">
+      <p className="no-tasks-description">No Tasks Added Yet</p>
+    </div>
+  )
+
   renderTasksContainer = () => {
     const {tasksList} = this.state
+
+    const tasksListLength = tasksList.length > 0
 
     return (
       <div className="tags-tasks-container">
@@ -93,11 +102,15 @@ class AddTasks extends Component {
           ))}
         </ul>
         <h1 className="tasks-heading">Tasks</h1>
-        <ul className="tasks-container">
-          {tasksList.map(eachTask => (
-            <TaskItem key={eachTask.id} eachTaskDetails={eachTask} />
-          ))}
-        </ul>
+        {tasksListLength ? (
+          <ul className="tasks-container">
+            {tasksList.map(eachTask => (
+              <TaskItem key={eachTask.id} eachTaskDetails={eachTask} />
+            ))}
+          </ul>
+        ) : (
+          this.renderNoTaskContainer()
+        )}
       </div>
     )
   }
@@ -135,7 +148,11 @@ class AddTasks extends Component {
               onChange={this.onChangeSelectInput}
             >
               {tagsList.map(eachTag => (
-                <option key={eachTag.optionId} className="tag-option">
+                <option
+                  key={eachTag.optionId}
+                  className="tag-option"
+                  value={eachTag.optionId}
+                >
                   {eachTag.displayText}
                 </option>
               ))}

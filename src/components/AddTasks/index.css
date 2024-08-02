@@ -63,6 +63,7 @@
 .tags-tasks-container {
   width: 70%;
   padding: 30px;
+  height: 100vh;
 }
 
 .tags-container {
@@ -87,4 +88,18 @@
 
 .tasks-container {
   padding: 0px;
+}
+
+.no-tasks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-tasks-description {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 20px;
 }

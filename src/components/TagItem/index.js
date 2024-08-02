@@ -10,9 +10,9 @@ const TagItem = props => {
 
   return (
     <li className="tag-item-container">
-      <button type="button" className="tag-button" onClick={onClickTagButton}>
+      <p className="tag-button" onClick={onClickTagButton}>
         {displayText}
-      </button>
+      </p>
     </li>
   )
 }

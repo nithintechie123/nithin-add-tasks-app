@@ -6,9 +6,7 @@ const TaskItem = props => {
   return (
     <li className="task-item-container">
       <p className="task-item-heading">{newTaskInput}</p>
-      <button type="button" className="task-item-display-text">
-        {displayText}
-      </button>
+      <p className="task-item-display-text">{displayText}</p>
     </li>
   )
 }
