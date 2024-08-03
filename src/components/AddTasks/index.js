@@ -36,7 +36,11 @@ const tagsList = [
 ]
 
 class AddTasks extends Component {
-  state = {taskInput: '', activeOptionId: tagsList[0].optionId, tasksList: []}
+  state = {
+    taskInput: '',
+    activeOptionId: tagsList[0].optionId,
+    tasksList: [],
+  }
 
   onChangeTaskInput = event => {
     this.setState({taskInput: event.target.value})
@@ -69,13 +73,15 @@ class AddTasks extends Component {
     }))
   }
 
-  clickedTagBtn = id => {
+  clickedTagItem = id => {
     const {tasksList} = this.state
-    const updatedTaskList = tasksList.filter(
+
+    const filteredTasksList = tasksList.filter(
       eachTask => eachTask.activeOptionId === id,
     )
-
-    this.setState({tasksList: updatedTaskList, activeOptionId: id})
+    this.setState(prevState => ({
+      tasksList: [...prevState.tasksList, filteredTasksList],
+    }))
   }
 
   renderNoTaskContainer = () => (
@@ -85,7 +91,7 @@ class AddTasks extends Component {
   )
 
   renderTasksContainer = () => {
-    const {tasksList, activeOptionId} = this.state
+    const {tasksList} = this.state
 
     const tasksListLength = tasksList.length > 0
 
@@ -97,8 +103,7 @@ class AddTasks extends Component {
             <TagItem
               key={eachTag.optionId}
               eachTagDetails={eachTag}
-              clickedTagBtn={this.clickedTagBtn}
-              isActive={activeOptionId === eachTag.optionId}
+              clickedTagItem={this.clickedTagItem}
             />
           ))}
         </ul>
@@ -117,7 +122,7 @@ class AddTasks extends Component {
   }
 
   render() {
-    const {taskInput} = this.state
+    const {taskInput, activeOptionId} = this.state
 
     return (
       <div className="app-container">
@@ -147,6 +152,7 @@ class AddTasks extends Component {
               id="tags"
               className="input-element"
               onChange={this.onChangeSelectInput}
+              value={activeOptionId}
             >
               {tagsList.map(eachTag => (
                 <option

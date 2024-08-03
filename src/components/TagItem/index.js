@@ -1,22 +1,16 @@
 import './index.css'
 
 const TagItem = props => {
-  const {eachTagDetails, clickedTagBtn, isActive} = props
+  const {eachTagDetails, clickedTagItem} = props
   const {displayText, optionId} = eachTagDetails
 
-  const activeTagBtnClassName = isActive ? 'active-tag-btn' : 'tag-btn'
-
-  const onClickTagButton = () => {
-    clickedTagBtn(optionId)
+  const onClickTagItem = () => {
+    clickedTagItem(optionId)
   }
 
   return (
     <li className="tag-item-container">
-      <button
-        type="button"
-        className={activeTagBtnClassName}
-        onClick={onClickTagButton}
-      >
+      <button type="button" className="tag-btn" onClick={onClickTagItem}>
         <p className="display-text">{displayText}</p>
       </button>
     </li>
